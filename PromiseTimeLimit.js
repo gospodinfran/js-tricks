@@ -23,14 +23,16 @@ const timeLimit = (fn, t) => {
 
 const awaitTimeLimit = (fn, t) => {
     return async function(...args) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => reject("TLE"), t)
+        return new Promise(async (resolve, reject) => {
+            const id = setTimeout(() => reject("TLE"), t)
 
             try {
                 const res = await fn(...args)
                 resolve(res)
             } catch (error) {
                 reject(error)
+            } finally {
+                clearTimeout(id)
             }
             
         })
