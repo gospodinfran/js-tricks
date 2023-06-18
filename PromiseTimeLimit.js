@@ -12,11 +12,12 @@
 const timeLimit = (fn, t) => {
     return async function(...args) {
         return new Promise((resolve, reject) => {
-            setTimeout(() => reject("Time limit exceeded"), t)
+            const id = setTimeout(() => reject("Time limit exceeded"), t)
 
             fn(...args)
                 .then((res) => resolve(res))
                 .catch((e) => reject(e))
+                .finally(clearTimeout(id))
         })
     }
 }
