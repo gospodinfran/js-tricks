@@ -1,14 +1,3 @@
-// Usage: 
-// 
-// function fn(t) {
-//     return new Promise(res => setTimeout(res, t))
-// }
-// 
-// const limited = timeLimit(fn, 100)
-// 
-// limited(150).catch(console.log)
-// 
-
 const timeLimit = (fn, t) => {
     return async function(...args) {
         return new Promise((resolve, reject) => {
@@ -39,3 +28,14 @@ const awaitTimeLimit = (fn, t) => {
         })
     }
 }
+
+// Usage: 
+// 
+// function fn(t) {
+//     return new Promise(res => setTimeout(res, t))
+// }
+// 
+// const limited = timeLimit(fn, 100)
+// 
+// limited(150).catch(console.log)
+// 
